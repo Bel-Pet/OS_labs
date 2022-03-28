@@ -24,15 +24,15 @@ int main() {
         execlp("cat", "cat", "text.txt", NULL);
         perror("exec: cat");
         _exit(ERROR);
-    } else {
-        /* Приостанавливаем процесс до выполнения дочернего процесса
-           В случае ошибки возвращается -1*/
-        //pid_t res_wait = wait(NULL);
-        //if (res_wait == ERROR_WAIT) {
-        //    perror("wait()");
-        //    return ERROR;
-        //}
-        printf("I am parent\n");
+    }
+    /* Приостанавливаем процесс до выполнения дочернего процесса
+       В случае ошибки возвращается -1*/
+    //pid_t res_wait = wait(NULL);
+    //if (res_wait == ERROR_WAIT) {
+    //    perror("wait()");
+    //    return ERROR;
+    //}
+    printf("I am parent\n");
     }
 
     return SUCCESS;
