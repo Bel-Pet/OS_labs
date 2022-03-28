@@ -4,6 +4,7 @@
 #include <sys/types.h>
 
 #define ERROR_FORK -1
+#define ERROR_WAIT -1
 #define ERROR 1
 #define SUCCESS 0
 
@@ -23,11 +24,16 @@ int main() {
         execlp("cat", "cat", "text.txt", NULL);
         perror("exec: cat");
         _exit(ERROR);
+    } else {
+        /* Приостанавливаем процесс до выполнения дочернего процесса
+           В случае ошибки возвращается -1*/
+        //pid_t res_wait = wait(NULL);
+        //if (res_wait == ERROR_WAIT) {
+        //    perror("wait()");
+        //    return ERROR;
+        //}
+        printf("I am parent\n");
     }
-
-    /* Приостанавливаем процесс до выполнения дочернего процесса */
-    //wait(NULL);
-    printf("I am parent\n");
 
     return SUCCESS;
 }
