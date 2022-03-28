@@ -41,7 +41,7 @@ int main(int argc, char*argv[]) {
 
     // Изменяем эффективный идентификатор процесса на фактический
     // В случае успеха возвращает 0, иначе -1
-    int result_setuid = setuid(getid());
+    int result_setuid = setuid(getuid());
     if (result_setuid == ERROR_SETUID) {
         perror("setuid()");
         return ERROR;
