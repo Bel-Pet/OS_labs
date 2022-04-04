@@ -33,7 +33,6 @@ int main() {
     //    return ERROR;
     //}
     printf("I am parent\n");
-    }
 
     return SUCCESS;
 }
