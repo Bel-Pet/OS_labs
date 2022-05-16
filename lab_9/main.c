@@ -19,7 +19,11 @@ int main() {
         perror("exec");
         _exit(ERROR);
     }
-    //wait(NULL);
+    pid_t pid = wait(NULL);
+    if (pid == ERROR_WAIT) {
+        perror("wait");
+        return ERROR;
+    }
     printf("I am parent\n");
 
     return SUCCESS;
