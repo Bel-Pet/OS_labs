@@ -26,7 +26,6 @@ int sending_child(int file_descriptors[NUMBER_OF_DESCRIPTORS]) {
 
         return ERROR;
     }
-
     /// родительский процесс завершает свою работу в функции после удачного создания потомка
     if (res_fork > CHILD_CODE) return res_fork;
 
@@ -40,6 +39,7 @@ int sending_child(int file_descriptors[NUMBER_OF_DESCRIPTORS]) {
     char buf[BUFFER_SIZE];
     int res_read = 0;
 
+    /// считываем текст и передаем его через программный канала
     do {
         res_read = read(STDIN_FILENO, buf, BUFFER_SIZE);
         if (res_read == READ_ERROR) {
@@ -84,6 +84,7 @@ int receiving_child(int file_descriptors[NUMBER_OF_DESCRIPTORS]) {
     char buf[BUFFER_SIZE];
     int res_read = 0;
 
+    /// считываем и преобразуем текст, затем выводим его
     do {
         res_read = read(file_descriptors[FIRST_DESCRIPTOR], buf, sizeof(buf));
         if (res_read == READ_ERROR) {
@@ -102,6 +103,7 @@ int receiving_child(int file_descriptors[NUMBER_OF_DESCRIPTORS]) {
         }
     } while (res_read > END_READ);
 
+    /// закрываем оставшийся конец канала
     res_close = close(file_descriptors[FIRST_DESCRIPTOR]);
     if (res_close == CLOSE_ERROR) {
         perror("close");
