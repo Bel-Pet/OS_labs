@@ -63,7 +63,7 @@ int setup_server_socket(int file_descriptor, char* address_name) {
         perror("bind");
         return ERROR;
     }
-    /// выражаем готовность сокета принять соединение и задаем размер очереди
+    /// выражаем готовность сокета принять соединение
     int res_listen = listen(file_descriptor, MAX_QUEUE_LEN);
     if (res_listen == LISTEN_ERROR){
         perror("listen");
