@@ -67,6 +67,7 @@ int setup_server_socket(int file_descriptor, char* address_name) {
     int res_listen = listen(file_descriptor, MAX_QUEUE_LEN);
     if (res_listen == LISTEN_ERROR){
         perror("listen");
+        unlink(address_name);
         return ERROR;
     }
 
@@ -93,6 +94,7 @@ int main() {
     if (res_accept == ACCEPT_ERROR){
         perror("accept");
         close(file_descriptor);
+        unlink(address_name);
         return ERROR;
     }
     /// считываем и конвертируем данные с последующим выводом
@@ -100,17 +102,20 @@ int main() {
     if (res_convert == ERROR) {
         close(res_accept);
         close(file_descriptor);
+        unlink(address_name);
         return ERROR;
     }
     /// закрываем дескрипторы
     int close_result = close(file_descriptor);
     if (close_result == CLOSE_ERROR) {
         perror("close");
+        unlink(address_name);
         return ERROR;
     }
     close_result = close(res_accept);
     if (close_result == CLOSE_ERROR) {
         perror("close");
+        unlink(address_name);
         return ERROR;
     }
 
