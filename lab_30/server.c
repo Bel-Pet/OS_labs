@@ -20,7 +20,7 @@
 #define ERROR 1
 
 #define BUFFER_SIZE 256
-#define MAX_QUEUE_LEN 3
+#define MAX_QUEUE_LEN 1
 
 int convert_text(int file_descriptor) {
     char buf[BUFFER_SIZE];
